@@ -34,7 +34,24 @@ const getItems = asyncHandler(async (req, res) => {
 	res.status(200).json(items);
 })
 
+// @desc		Delete an item
+// @routes	DELETE /api/items/:id
+// @access	Public
+const deleteItem = asyncHandler(async (req, res) => {
+	const item = await Item.findById(req.params.id)
+
+	if(!item) {
+		res.status(400)
+	}
+
+	await item.remove();
+
+	res.status(200).json({success: true});
+});
+
+
 module.exports = {
 	createItem,
-	getItems
+	getItems,
+	deleteItem
 }
