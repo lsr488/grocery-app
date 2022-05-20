@@ -49,10 +49,24 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 	await recipe.remove();
 
 	res.status(200).json({success: true});
+});
+
+// @desc		Delete a item
+// @routes	DELETE /api/recipes/:id
+// @access	Public
+const updateRecipe = asyncHandler(async (req, res) => {
+	const recipe = await Recipe.findByIdAndUpdate(req.params.id, req.body);
+
+	if(!recipe) {
+		res.status(404);
+	}
+
+	res.status(200).json(recipe);
 })
 
 module.exports = {
 	createRecipe,
 	getRecipes,
-	deleteRecipe
+	deleteRecipe,
+	updateRecipe
 }
