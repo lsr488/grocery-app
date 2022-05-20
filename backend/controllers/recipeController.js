@@ -30,15 +30,29 @@ const getRecipes = asyncHandler(async (req, res) => {
 
 	if(!recipes) {
 		res.status(400);
-		throw new Error('No recipes to display');
-		console.log(error);
 	}
 
 	res.status(200).json(recipes);
 
 });
 
+// @desc		Delete a item
+// @routes	DELETE /api/recipes/:id
+// @access	Public
+const deleteRecipe = asyncHandler(async (req, res) => {
+	const recipe = await Recipe.findById(req.params.id);
+
+	if(!recipe) {
+		res.status(404);
+	}
+
+	await recipe.remove();
+
+	res.status(200).json({success: true});
+})
+
 module.exports = {
 	createRecipe,
-	getRecipes
+	getRecipes,
+	deleteRecipe
 }
