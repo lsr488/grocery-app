@@ -5,8 +5,7 @@ const Item = require('../models/itemModel');
 // @routes	POST /api/items
 // @access	Public
 const createItem = asyncHandler(async (req, res) => {
-	const {name} = req.body
-	console.log(req.body);
+	const {name, status} = req.body
 
 	if(!name) {
 		res.status(400)
@@ -14,7 +13,8 @@ const createItem = asyncHandler(async (req, res) => {
 	}
 
 	const item = await Item.create({
-		name
+		name,
+		status
 	})
 
 	res.status(201).json(item);
