@@ -1,6 +1,18 @@
+import ItemForm from '../components/ItemForm'
+import Item from '../components/Item'
+
 function Home() {
 	return (
-		<h1>My Home Page</h1>
+		<>
+			<section className="heading">
+				<h1>Grocery App</h1>
+				{/*<ItemForm />*/}
+				<Item />
+
+			{/* Recipe Component */}
+
+			</section>
+		</>
 	)
 }
 
