@@ -6,8 +6,8 @@ const itemSchema = mongoose.Schema({
 		required: true
 	},
 	status: {
-		type: Boolean,
-		default: false,
+		type: String,
+		default: 'false',
 		required: true
 	}
 });
