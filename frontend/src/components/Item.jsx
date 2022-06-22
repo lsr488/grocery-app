@@ -13,6 +13,7 @@ function Item() {
 		getItems()
 	}, [])
 
+	// get items from database and setItems based on response
 	const getItems = async () => {
 		await axios.get('/api/items')
 			.then((response) => {
@@ -21,21 +22,22 @@ function Item() {
 			.catch((error) => console.log('Error', error))
 	}
 
-	// toggles strikethough on item name
-	const strikeThrough = (e) => {
+	// toggles strikethough on item name when clicked
+	const strikeThrough = async (e) => {
 		const updatedItem = items.filter((item) => item._id === e.target.id)
-		
+
 		if(updatedItem[0].status === 'false') {
 			updatedItem[0].status = 'true'
 		} else {
 			updatedItem[0].status = 'false'
 		}
 
-		e.target.classList.toggle('checked')
+		// e.target.classList.toggle('checked')
 
-		axios.put(`api/items/${e.target.id}`, updatedItem[0])
+		await axios.put(`api/items/${e.target.id}`, updatedItem[0])
+			.catch((error) => console.log('Error', error))
 
-		setItems(items)
+		setItems([...items])
 	}
 
 	const onDelete = async (id) => {
@@ -54,7 +56,7 @@ function Item() {
 
 		await axios.post('/api/items', item)
 			.then((response) => setItems(prevItems => [...prevItems, response.data]))
-			.catch((error) => console.log(error))
+			.catch((error) => console.log('Error', error))
 	}
 
 	if(!items) {
