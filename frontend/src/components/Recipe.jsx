@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import {FaRegSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
+import {FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
 
 function Recipe() {
 	const [recipes, setRecipes] = useState([{
@@ -27,15 +27,18 @@ function Recipe() {
 
 	return (
 		<div>
-			<h2>Recipes</h2>
-			<ul>
+			<h2 className="recipe-heading">Recipes</h2>
+			<div>
 				{recipes.map(recipe => (
-					<li>{recipe.name}
-						<li>{recipe.url}</li>
-						<li>{recipe.notes}</li>
-					</li>
+					<div key={recipe.id}>
+						{recipe.url ? 
+							<p className="recipe-items"><FaSquare /><a href={recipe.url}>{recipe.name}</a></p> : 
+							<p className="recipe-items"><FaSquare />{recipe.name}</p>
+						}
+						<p className="recipe-notes">{recipe.notes}</p>
+					</div>
 				))}
-			</ul>	
+			</div>	
 		</div>
 		
 	)
