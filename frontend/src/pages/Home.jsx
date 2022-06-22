@@ -1,5 +1,6 @@
-import ItemForm from '../components/ItemForm'
+// import ItemForm from '../components/ItemForm'
 import Item from '../components/Item'
+import Recipe from '../components/Recipe'
 
 function Home() {
 	return (
@@ -9,7 +10,7 @@ function Home() {
 				{/*<ItemForm />*/}
 				<Item />
 
-			{/* Recipe Component */}
+				<Recipe />
 
 			</section>
 		</>
