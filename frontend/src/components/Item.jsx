@@ -65,7 +65,7 @@ function Item() {
 
 	return (
 			<>
-				<h2>Item Form</h2>
+				{/*<h2>Item Form</h2>*/}
 					<form onSubmit={addItem}>
 						<div>
 							<input
@@ -93,7 +93,7 @@ function Item() {
 										status={item.status}
 										id={item._id}
 									>{item.name} </span>
-										<span onClick={() => onDelete(item._id)}><FaTrash /></span>
+										<span onClick={() => onDelete(item._id)} className="icons"><FaTrash /></span>
 								</li>
 							))}
 							</ul>
