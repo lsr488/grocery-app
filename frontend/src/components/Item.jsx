@@ -17,16 +17,44 @@ function Item() {
 		await axios.get('/api/items')
 			.then((response) => {
 				setItems(response.data)
-				console.log(response.data)
-
 			})
 			.catch((error) => console.log('Error', error))
 	}
 
-	const onDelete = async (thisItem) => {
-		const updatedItems = items.filter((item) => item._id !== thisItem._id)
-		await axios.delete(`/api/items/${thisItem._id}`)
+	// toggles strikethough on item name
+	const strikeThrough = (e) => {
+		const updatedItem = items.filter((item) => item._id === e.target.id)
+		
+		if(updatedItem[0].status === 'false') {
+			updatedItem[0].status = 'true'
+		} else {
+			updatedItem[0].status = 'false'
+		}
+
+		e.target.classList.toggle('checked')
+
+		axios.put(`api/items/${e.target.id}`, updatedItem[0])
+
+		setItems(items)
+	}
+
+	const onDelete = async (id) => {
+		const updatedItems = items.filter((item) => item._id !== id)
+		await axios.delete(`/api/items/${id}`)
 		setItems(updatedItems)
+	}
+
+  const onChange = (e) => {}
+
+
+	const addItem = async (e) => {
+		e.preventDefault()
+
+		const item = {name: e.target[0].value}
+
+		await axios.post('/api/items', item)
+			.then((response) => setItems(prevItems => [...prevItems, response.data]))
+			.catch((error) => console.log(error))
 	}
 
 	if(!items) {
@@ -35,13 +63,35 @@ function Item() {
 
 	return (
 			<>
+				<h2>Item Form</h2>
+					<form onSubmit={addItem}>
+						<div>
+							<input
+								type="text"
+								id="name"
+								name="name"
+								onChange={onChange}
+								placeholder="Enter item name"
+								required 
+							/>
+						</div>
+						<div>
+							<button type="submit">Submit</button>
+						</div>
+					</form>
+
 				<h2>Items</h2>
 					<div>
 						<ul>
 							{items.map((item) => (
-								<li key={item._id} status={item.status}><FaRegSquare />
-									<span className={`items ${item.status === 'true' ? 'checked' : ''}`}>{item.name} </span>
-									<span><span><FaPen /></span> <span onClick={() => onDelete(item)}><FaTrash /></span></span>
+								<li key={item._id}><FaRegSquare />
+									<span
+										className={`items ${item.status === 'true' ? 'checked' : ''}`}
+										onClick={strikeThrough}
+										status={item.status}
+										id={item._id}
+									>{item.name} </span>
+										<span onClick={() => onDelete(item._id)}><FaTrash /></span>
 								</li>
 							))}
 							</ul>
