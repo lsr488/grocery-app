@@ -1,10 +1,12 @@
 body {
-  margin: 0;
+  margin: 1.2em;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--main-bg-color);
+  box-sizing: border-box;
 }
 
 code {
@@ -12,21 +14,56 @@ code {
     monospace;
 }
 
+:root {
+  /*--main-bg-color: #e2decc;*/
+  --button-color: #06666D;
+  --input-bg-color: #f2f2f2;
+  --main-bg-color:  #DEE3E6;
+  --font-color-brown: #262416;
+  --font-color-green: #192823;
+  /*--font-color: #000000;*/
+}
+
 ul {
   list-style:  none;
-  padding-left:  1.2em;
   text-indent:  1.2em;
-  margin-left:  1.2em;
+  margin-right:  1.2em;
+  /*margin-left:  1.2em;*/
+  /*padding-left:  1.2em;*/
+  /*margin:  auto;*/
+  /*display:  block;*/
 }
 
 li {
   display:  flex;
-  width: 500px;
-  align-items: center;
   margin-bottom: 7px;
 }
 
+input {
+  border-radius: 6px;
+  font-family:  inherit;
+  font-size:  14px;
+  width: 50%;
+  text-align: center;
+  background-color: var(--input-bg-color);
+}
+
+button {
+  margin-top: 1em;
+  border-radius: 6px;
+  width: 75px;
+  height: 25px;
+  color:  var(--input-bg-color);
+  background-color: var(--button-color);
+  font-family:  inherit;
+  font-size:  12px;
+  font-weight: bold;
+  text-align: center;
+
+}
+
 .heading {
+  color: var(--font-color-green);
   text-align:  center;
   margin-bottom:  50px;
 }
@@ -36,7 +73,6 @@ li {
 }
 
 .icons {
-  /*margin-left: auto;*/
 }
 
 .checked {
