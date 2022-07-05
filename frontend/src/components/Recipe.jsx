@@ -22,25 +22,21 @@ function Recipe() {
 			.catch((error) => console.log('Error', error))
 	}
 
-	console.log(recipes)
-
-
 	return (
 		<div>
-			<h2 className="recipe-heading">Recipes</h2>
-			<div>
-				{recipes.map(recipe => (
-					<div key={recipe.id}>
+		<h2 className="recipe-heading">Recipes</h2>
+			<ul>
+				{recipes.map((recipe) => (
+					<li className="recipe-list" key={recipe._id}><FaSquare />
 						{recipe.url ? 
-							<p className="recipe-items"><FaSquare /><a href={recipe.url}>{recipe.name}</a></p> : 
-							<p className="recipe-items"><FaSquare />{recipe.name}</p>
+							<span className="recipe-list-item" id={recipe._id}><a href={recipe.url}>{recipe.name}</a></span> : 
+							<span className="recipe-list-item">{recipe.name}</span>
 						}
-						<p className="recipe-notes">{recipe.notes}</p>
-					</div>
+						<span className="recipe-list-notes">{recipe.notes}</span>
+					</li>
 				))}
-			</div>	
+				</ul>
 		</div>
-		
 	)
 }
 
