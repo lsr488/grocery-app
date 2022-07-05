@@ -86,13 +86,13 @@ function Item() {
 					<div>
 						<ul>
 							{items.map((item) => (
-								<li key={item._id}><FaRegSquare />
+								<li className="item-list-item" key={item._id}><FaRegSquare />
 									<span
 										className={`items ${item.status === 'true' ? 'checked' : ''}`}
 										onClick={strikeThrough}
 										status={item.status}
 										id={item._id}
-									>{item.name} </span>
+									>{item.name}</span>
 										<span onClick={() => onDelete(item._id)} className="icons"><FaTrash /></span>
 								</li>
 							))}
