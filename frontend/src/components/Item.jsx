@@ -41,7 +41,7 @@ function Item() {
 		setItems([...items])
 	}
 
-	const onDelete = async (id) => {
+	const deleteItem = async (id) => {
 		const updatedItems = items.filter((item) => item._id !== id)
 		await axios.delete(`/api/items/${id}`)
 		setItems(updatedItems)
@@ -120,7 +120,7 @@ function Item() {
 							>{item.name}</span>
 							<span onClick={() => editItem(item)} className={`element-icon-save ${item.isEditing ? null : 'hidden'}`}><FaCheck /></span>
 							<span onClick={() => editItem(item)} className={`element-icon-edit ${item.isEditing ? 'hidden' : null}`}><FaPen /></span>
-							<span onClick={() => onDelete(item._id)} className={`element-icon-trash ${item.isEditing ? 'hidden' : null}`}><FaTrash /></span>
+							<span onClick={() => deleteItem(item._id)} className={`element-icon-trash ${item.isEditing ? 'hidden' : null}`}><FaTrash /></span>
 						</li>
 					))}
 				</ul>
