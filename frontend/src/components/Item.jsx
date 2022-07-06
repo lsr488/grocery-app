@@ -6,6 +6,7 @@ function Item() {
 	const [items, setItems] = useState([{
 		name: '',
 		status: '',
+		isEditing: '',
 		_id: ''
 	}])
 
@@ -46,10 +47,19 @@ function Item() {
 		setItems(updatedItems)
 	}
 
-  const onChange = (e) => {
-	console.log(e)
+	const onChange = (e) => {}
 
-  }
+	// edit name of item and change CSS background color
+	const editItem = async (e) => {
+		const updatedItem = items.filter((item) => item._id === e._id)
+
+		updatedItem[0].isEditing = !e.isEditing
+
+		await axios.put(`api/items/${e._id}`, updatedItem[0])
+			.catch((error) => console.log('Error', error))
+
+		setItems([...items])
+	}
 
 
 	const addItem = async (e) => {
@@ -92,12 +102,12 @@ function Item() {
 								{item.status === "true" ? <FaSquare /> : <FaRegSquare />}
 							</span>
 							<span
-								className={`element-item-name ${item.status === 'true' ? 'checked' : ''}`}
+								className={`element-item-name ${item.status === 'true' ? 'checked' : ''} ${item.isEditing ? 'editing' : ''}`}
 								onClick={strikeThrough}
 								status={item.status}
 								id={item._id}
-							>{item.name} {item._id}</span>
-							<span onClick={() => onChange(item)} className="element-icon-edit"><FaPen /></span>
+							>{item.name}</span>
+							<span onClick={() => editItem(item)} className="element-icon-edit"><FaPen /></span>
 							<span onClick={() => onDelete(item._id)} className="element-icon-trash"><FaTrash /></span>
 						</li>
 					))}
