@@ -9,6 +9,10 @@ const itemSchema = mongoose.Schema({
 		type: String,
 		default: 'false',
 		required: true
+	},
+	isEditing: {
+		type: Boolean,
+		default: false
 	}
 });
 
