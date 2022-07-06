@@ -47,10 +47,10 @@ function Item() {
 		setItems(updatedItems)
 	}
 
-	const onChange = (e) => {}
-
 	// edit name of item and change CSS background color
 	const editItem = async (e) => {
+		// console.log(e)
+		// changeName(e)
 		const updatedItem = items.filter((item) => item._id === e._id)
 
 		updatedItem[0].isEditing = !e.isEditing
@@ -61,6 +61,13 @@ function Item() {
 		setItems([...items])
 	}
 
+	const onChange = () => {
+
+	}
+
+	const changeName = (item) => {
+		console.log(item.name)
+	}
 
 	const addItem = async (e) => {
 		e.preventDefault()
@@ -102,13 +109,18 @@ function Item() {
 								{item.status === "true" ? <FaSquare /> : <FaRegSquare />}
 							</span>
 							<span
+								// className={`element-item-name ${item.status === 'true' ? 'checked' : ''}`}
 								className={`element-item-name ${item.status === 'true' ? 'checked' : ''} ${item.isEditing ? 'editing' : ''}`}
-								onClick={strikeThrough}
+								// onClick={strikeThrough}
+								onClick={!item.isEditing ? strikeThrough : null}
+								// contentEditable={item.isEditing}
 								status={item.status}
 								id={item._id}
+								value={item.name}
 							>{item.name}</span>
-							<span onClick={() => editItem(item)} className="element-icon-edit"><FaPen /></span>
-							<span onClick={() => onDelete(item._id)} className="element-icon-trash"><FaTrash /></span>
+							<span onClick={() => editItem(item)} className={`element-icon-save ${item.isEditing ? null : 'hidden'}`}><FaCheck /></span>
+							<span onClick={() => editItem(item)} className={`element-icon-edit ${item.isEditing ? 'hidden' : null}`}><FaPen /></span>
+							<span onClick={() => onDelete(item._id)} className={`element-icon-trash ${item.isEditing ? 'hidden' : null}`}><FaTrash /></span>
 						</li>
 					))}
 				</ul>
