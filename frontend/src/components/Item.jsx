@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import {FaRegSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
+import {FaRegSquare, FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
 
 function Item() {
 	const [items, setItems] = useState([{
@@ -46,7 +46,10 @@ function Item() {
 		setItems(updatedItems)
 	}
 
-  const onChange = (e) => {}
+  const onChange = (e) => {
+	console.log(e)
+
+  }
 
 
 	const addItem = async (e) => {
@@ -85,14 +88,16 @@ function Item() {
 				<ul>
 					{items.map((item) => (
 						<li className="element-container" key={item._id}>
-							<span className="element-line-decoration"><FaRegSquare /></span>
+							<span className="element-line-decoration">
+								{item.status === "true" ? <FaSquare /> : <FaRegSquare />}
+							</span>
 							<span
 								className={`element-item-name ${item.status === 'true' ? 'checked' : ''}`}
 								onClick={strikeThrough}
 								status={item.status}
 								id={item._id}
-							>{item.name}</span>
-							<span className="element-icon-edit"><FaPen /></span>
+							>{item.name} {item._id}</span>
+							<span onClick={() => onChange(item)} className="element-icon-edit"><FaPen /></span>
 							<span onClick={() => onDelete(item._id)} className="element-icon-trash"><FaTrash /></span>
 						</li>
 					))}
