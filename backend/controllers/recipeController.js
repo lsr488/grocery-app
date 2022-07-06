@@ -51,8 +51,8 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 	res.status(200).json({success: true});
 });
 
-// @desc		Delete a item
-// @routes	DELETE /api/recipes/:id
+// @desc		Update a item
+// @routes	PUT /api/recipes/:id
 // @access	Public
 const updateRecipe = asyncHandler(async (req, res) => {
 	const recipe = await Recipe.findByIdAndUpdate(req.params.id, req.body);
