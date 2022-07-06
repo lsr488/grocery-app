@@ -10,10 +10,10 @@ function Recipe() {
 	}])
 
 	useEffect(() => {
-				getRecipes()
-		}, [])
+		getRecipes()
+	}, [])
 
-		// get items from database and setItems based on response
+	// get items from database and setItems based on response
 	const getRecipes = async () => {
 		await axios.get('/api/recipes')
 			.then((response) => {
