@@ -27,16 +27,9 @@ code {
 
 ul {
   list-style:  none;
-  /*text-indent:  1.2em;*/
-  /*margin-right:  1.2em;*/
-  /*margin-left:  1.2em;*/
-  /*padding-left:  1.2em;*/
-  /*margin:  auto;*/
-  /*display:  block;*/
 }
 
 li {
-  /*display:  flex;*/
   margin-bottom: 7px;
 }
 
@@ -62,43 +55,41 @@ button {
   text-align: center;
 }
 
-.heading {
-  text-align:  center;
-  margin-bottom:  50px;
-}
-
-.items {
-  margin-right:  auto;
-  text-align:  left;
-}
-
-.item-list-item {
-  display:  flex;
-  text-indent:  1.2em;
-}
-
-.icons {
-}
-
 .checked {
   text-decoration: line-through;
 }
 
-.recipe-heading {
-  text-align: center;
+.heading {
+  text-align:  center;
+  margin: 25px 0 25px 0;
 }
 
-.recipe-list {
-  text-align: left;
+.element-container {
+  border: 1px solid red;
+  margin-left: auto;
   margin-right: auto;
+  display: grid;
+  align-items: center;
+  max-width: 500px;
+  grid-template-columns: 25px auto 25px 25px;
 }
 
-.recipe-list-item {
-  margin-left: 1.2em;
+.element-line-decoration {
+  grid-column: 1 / 2;
 }
 
-.recipe-list-notes {
-  display:  block;
+.element-item-name {
+  grid-column: 2 / 3;
   text-align: left;
-  margin-left: 3.5em;
+  margin-left: 6px;
+}
+
+.element-icon-trash {
+  grid-column: 4 / 5;
+}
+
+.element-item-notes {
+  grid-column: 2 /3;
+  text-align: left;
+  margin-left: 31px;
 }

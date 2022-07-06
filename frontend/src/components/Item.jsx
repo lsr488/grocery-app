@@ -65,40 +65,39 @@ function Item() {
 
 	return (
 			<>
-				{/*<h2>Item Form</h2>*/}
-					<form onSubmit={addItem}>
-						<div>
-							<input
-								type="text"
-								id="name"
-								name="name"
-								onChange={onChange}
-								placeholder="Enter item name"
-								required 
-							/>
-						</div>
-						<div>
-							<button type="submit">Submit</button>
-						</div>
-					</form>
-
-				<h2>Items</h2>
+				<form onSubmit={addItem}>
 					<div>
-						<ul>
-							{items.map((item) => (
-								<li className="item-list-item" key={item._id}><FaRegSquare />
-									<span
-										className={`items ${item.status === 'true' ? 'checked' : ''}`}
-										onClick={strikeThrough}
-										status={item.status}
-										id={item._id}
-									>{item.name}</span>
-										<span onClick={() => onDelete(item._id)} className="icons"><FaTrash /></span>
-								</li>
-							))}
-							</ul>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							onChange={onChange}
+							placeholder="Enter item name"
+							required 
+						/>
 					</div>
-			</>
+					<div>
+						<button type="submit">Submit</button>
+					</div>
+				</form>
+
+				<h2 className="heading">Items</h2>
+				<ul>
+					{items.map((item) => (
+						<li className="element-container" key={item._id}>
+							<span className="element-line-decoration"><FaRegSquare /></span>
+							<span
+								className={`element-item-name ${item.status === 'true' ? 'checked' : ''}`}
+								onClick={strikeThrough}
+								status={item.status}
+								id={item._id}
+							>{item.name}</span>
+							<span className="element-icon-edit"><FaPen /></span>
+							<span onClick={() => onDelete(item._id)} className="element-icon-trash"><FaTrash /></span>
+						</li>
+					))}
+				</ul>
+		</>
 	)
 }
 

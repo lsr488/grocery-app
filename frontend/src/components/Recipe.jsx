@@ -23,20 +23,23 @@ function Recipe() {
 	}
 
 	return (
-		<div>
-		<h2 className="recipe-heading">Recipes</h2>
+		<>
+			<h2 className="heading">Recipes</h2>
 			<ul>
 				{recipes.map((recipe) => (
-					<li className="recipe-list" key={recipe._id}><FaSquare />
+					<li className="element-container" key={recipe._id}><FaSquare />
 						{recipe.url ? 
-							<span className="recipe-list-item" id={recipe._id}><a href={recipe.url}>{recipe.name}</a></span> : 
-							<span className="recipe-list-item">{recipe.name}</span>
+							<span className="element-item-name" id={recipe._id}><a href={recipe.url}>{recipe.name}</a></span> : 
+							<span className="element-item-name" id={recipe._id}>{recipe.name}</span>
 						}
-						<span className="recipe-list-notes">{recipe.notes}</span>
+
+						<span className="element-icon-edit"><FaPen /></span>
+						<span className="element-icon-trash"><FaTrash /></span>
+						<span className="element-item-notes">{recipe.notes}</span>
 					</li>
 				))}
-				</ul>
-		</div>
+			</ul>
+		</>
 	)
 }
 
