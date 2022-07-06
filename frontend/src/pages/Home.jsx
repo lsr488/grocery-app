@@ -7,11 +7,8 @@ function Home() {
 		<>
 			<section className="heading">
 				<h1>Grocery App</h1>
-				{/*<ItemForm />*/}
 				<Item />
-
 				<Recipe />
-
 			</section>
 		</>
 	)
