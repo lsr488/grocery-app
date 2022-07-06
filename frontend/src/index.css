@@ -56,13 +56,20 @@ button {
   text-align: center;
 }
 
+.heading {
+  text-align:  center;
+  margin: 25px 0 25px 0;
+}
+
 .checked {
   text-decoration: line-through;
 }
 
-.heading {
-  text-align:  center;
-  margin: 25px 0 25px 0;
+.editing {
+  border-radius: 6px;
+  text-indent: 6px;
+  border: 1px solid gray;
+  background-color: var(--input-bg-color);
 }
 
 .element-container {
