@@ -109,8 +109,8 @@ function Item() {
 								{item.status === "true" ? <FaSquare /> : <FaRegSquare />}
 							</span>
 							<span
-								// className={`element-item-name ${item.status === 'true' ? 'checked' : ''}`}
-								className={`element-item-name ${item.status === 'true' ? 'checked' : ''} ${item.isEditing ? 'editing' : ''}`}
+								// className={`element-item-name ${item.status === 'true' ? 'checked' : null}`}
+								className={`element-item-name ${item.status === 'true' ? 'checked' : null} ${item.isEditing ? 'editing' : null}`}
 								// onClick={strikeThrough}
 								onClick={!item.isEditing ? strikeThrough : null}
 								// contentEditable={item.isEditing}
