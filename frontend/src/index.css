@@ -65,6 +65,10 @@ button {
   text-decoration: line-through;
 }
 
+.hidden {
+  display: none;
+}
+
 .editing {
   border-radius: 6px;
   text-indent: 6px;
@@ -89,6 +93,14 @@ button {
   grid-column: 2 / 3;
   text-align: left;
   margin-left: 6px;
+}
+
+.element-icon-edit {
+  grid-column: 3 / 4;
+}
+
+.element-icon-save {
+  grid-column: 3 / 4;
 }
 
 .element-icon-trash {
