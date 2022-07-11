@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {FaRegSquare, FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
+import ItemForm from './ItemForm'
 
 function Item() {
 	const [items, setItems] = useState([{
@@ -69,6 +70,7 @@ function Item() {
 		console.log(item.name)
 	}
 
+	// add item to db
 	const addItem = async (e) => {
 		e.preventDefault()
 
@@ -77,6 +79,9 @@ function Item() {
 		await axios.post('/api/items', item)
 			.then((response) => setItems(prevItems => [...prevItems, response.data]))
 			.catch((error) => console.log('Error', error))
+
+		// sets input field back to empty
+		e.target[0].value = ''
 	}
 
 	if(!items) {
@@ -85,21 +90,7 @@ function Item() {
 
 	return (
 			<>
-				<form onSubmit={addItem}>
-					<div>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							onChange={onChange}
-							placeholder="Enter item name"
-							required 
-						/>
-					</div>
-					<div>
-						<button type="submit">Submit</button>
-					</div>
-				</form>
+				<ItemForm onSubmit={addItem}/>
 
 				<h2 className="heading">Items</h2>
 				<ul>
