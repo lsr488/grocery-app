@@ -65,6 +65,11 @@ button {
   text-decoration: line-through;
 }
 
+.more-text {
+  color: var(--font-color-brown);
+  font-size: .9em;
+}
+
 .hidden {
   display: none;
 }
