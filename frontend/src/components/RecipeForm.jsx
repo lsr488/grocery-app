@@ -9,20 +9,25 @@ function RecipeForm(props) {
             name="name"
             placeholder="Enter a recipe name"
           />
-
-          <input 
-            type="text"
-            id="recipe=url"
-            name="url"
-            placeholder="Enter a URL"
-          />
           
-          <input 
-            type="text"
-            id="recipe-notes"
-            name="notes"
-            placeholder="Enter notes"
-          />          
+          <details>
+            <summary className="more-text">More</summary>
+            <div>
+              <input 
+                type="text"
+                id="recipe=url"
+                name="url"
+                placeholder="Enter a URL"
+              />
+              
+              <input 
+                type="text"
+                id="recipe-notes"
+                name="notes"
+                placeholder="Enter notes"
+              />          
+            </div>
+          </details>
         </div>
 
         <div>
