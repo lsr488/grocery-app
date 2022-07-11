@@ -24,7 +24,7 @@ function RecipeForm(props) {
                 type="text"
                 id="recipe-notes"
                 name="notes"
-                placeholder="Enter notes"
+                placeholder="Enter notes. Separate with semicolon"
               />          
             </div>
           </details>
