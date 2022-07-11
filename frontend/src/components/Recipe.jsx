@@ -12,7 +12,7 @@ function Recipe() {
 
 	useEffect(() => {
 		getRecipes()
-	}, [recipes])
+	}, [])
 
 	// get recipes from database and setRecipes based on response
 	const getRecipes = async () => {
@@ -50,15 +50,20 @@ function Recipe() {
 	// add new recipe to db
 	const addRecipe = async (e) => {
 		e.preventDefault()
-
-		// console.log("addRecipe", e.target)
-		console.log(recipes)
 		
-		// const recipe = { name: e.target[0].value }
+		const recipe = { 
+			name: e.target[0].value,
+			url: e.target[1].value,
+			notes: e.target[2].value
+		}
 
 		await axios.post('/api/recipes', recipe)
 			.then((response) => setRecipes(prevRecipes => [...prevRecipes, response.data]))
 			.catch((error) => console.error('Error', error))
+
+		e.target[0].value = ''
+		e.target[1].value = ''
+		e.target[2].value = ''
 	}
 
 	return (
@@ -75,11 +80,11 @@ function Recipe() {
 						<span className="element-line-decoration"><FaSquare /></span>
 
 						{recipe.url ? 
-							<span className="element-item-name" id={recipe._id}><a href={recipe.url}>{recipe.name}</a></span> : 
-							<span className="element-item-name" id={recipe._id}>{recipe.name}</span>
+							<span className="element-item-name"><a href={recipe.url}>{recipe.name}</a></span> : 
+							<span className="element-item-name">{recipe.name}</span>
 						}
 
-						{/* <span className="element-icon-edit"><FaPen /></span> */}
+						<span className="element-icon-edit"><FaPen /></span>
 						
 						<span 
 							className="element-icon-trash"
