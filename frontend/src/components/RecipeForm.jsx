@@ -19,7 +19,9 @@ function RecipeForm(props) {
                 name="url"
                 placeholder="Enter a URL"
               />
-              
+            </div>
+
+            <div>  
               <input 
                 type="text"
                 id="recipe-notes"
