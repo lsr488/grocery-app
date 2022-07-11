@@ -1,5 +1,4 @@
 function ItemForm(props) {
-	console.log(props)
 
 	return (
 			<>
