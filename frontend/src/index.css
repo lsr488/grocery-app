@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--main-bg-color);
-  color:  var(--font-color-green);  
+  color: var(--font-color-green);  
   box-sizing: border-box;
 }
 
@@ -16,13 +16,10 @@ code {
 }
 
 :root {
-  /*--main-bg-color: #e2decc;*/
   --button-color: #06666D;
   --input-bg-color: #f2f2f2;
   --main-bg-color:  #DEE3E6;
-  --font-color-brown: #262416;
   --font-color-green: #192823;
-  /*--font-color: #000000;*/
 }
 
 ul {
@@ -66,8 +63,7 @@ button {
 }
 
 .more-text {
-  color: var(--font-color-brown);
-  font-size: .9em;
+  font-size: .8em;
 }
 
 .hidden {
