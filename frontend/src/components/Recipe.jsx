@@ -66,6 +66,13 @@ function Recipe() {
 		e.target[2].value = ''
 	}
 
+	// splits recipe notes into an array so they can be broken onto own lines
+	const splitNotes = (notes) => {
+		const splitNotes = notes.split('; ')
+
+		return splitNotes
+	}
+
 	return (
 		<>
 			<h2 className="heading">Recipes</h2>
@@ -91,7 +98,11 @@ function Recipe() {
 						>
 							<FaTrash />
 						</span>
-						<span className="element-item-notes">{recipe.notes}</span>
+					
+						<span className="element-item-notes">
+							{splitNotes(recipe.notes).map(note => <div>{note}</div>)}
+						</span>
+
 					</li>
 				))}
 			</ul>
