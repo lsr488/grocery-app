@@ -67,11 +67,7 @@ function Recipe() {
 	}
 
 	// splits recipe notes into an array so they can be broken onto own lines
-	const splitNotes = (notes) => {
-		const splitNotes = notes.split('; ')
-
-		return splitNotes
-	}
+	const splitNotes = (notes => notes.split(';'))
 
 	return (
 		<>
