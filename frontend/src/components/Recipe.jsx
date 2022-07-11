@@ -72,7 +72,6 @@ function Recipe() {
 			<RecipeForm 
 				recipes={recipes} 
 				addRecipe={addRecipe} 
-				handleChange={handleChange}
 			/>
 			<ul>
 				{recipes.map((recipe) => (
