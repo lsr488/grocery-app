@@ -9,7 +9,7 @@ function ItemForm(props) {
 								type="text" 
 								id="name"
 								name="name"
-								placeholder="Enter item name" 
+								placeholder="Enter item name"
 								required 
 						/>
 						</div>
@@ -22,5 +22,3 @@ function ItemForm(props) {
 }
 
 export default ItemForm
-
-
