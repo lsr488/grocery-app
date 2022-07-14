@@ -106,9 +106,17 @@ function Recipe() {
 							<span className="element-item-name">{recipe.name}</span>
 						}
 
+						{/* Save Icon */}
+						<span
+							className={`element-icon-save ${recipe.isEditing ? '' : 'hidden'}`}
+							onClick={() => editRecipe(recipe)}
+						>
+							<FaCheck />
+						</span>
+
 						{/* Edit Icon */}
 						<span 
-							className="element-icon-edit"
+							className={`element-icon-edit ${recipe.isEditing ? 'hidden' : ''}`}
 							onClick={() => editRecipe(recipe)}
 						>
 							<FaPen />
@@ -116,11 +124,12 @@ function Recipe() {
 						
 						{/* Delete Icon */}
 						<span 
-							className="element-icon-trash"
+							className={`element-icon-trash ${recipe.isEditing ? 'hidden' : ''}`}
 							onClick={() => deleteRecipe(recipe._id)}
 						>
 							<FaTrash />
 						</span>
+						
 					
 						<span className="element-item-notes">
 							{splitNotes(recipe.notes).map(note => <div>{note}</div>)}
