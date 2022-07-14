@@ -7,7 +7,8 @@ function Recipe() {
 	const [recipes, setRecipes] = useState([{
 		name: '',
 		notes: '',
-		url: ''
+		url: '',
+		isEditing: false
 	}])
 
 	useEffect(() => {
@@ -28,6 +29,23 @@ function Recipe() {
 		const updatedRecipes = recipes.filter((recipe) => recipe._id !== id)
 		await axios.delete(`/api/recipes/${id}`)
 		setRecipes(updatedRecipes)
+	}
+
+	// changes isEditing status
+	const editRecipe = async (e) => {
+		console.log("e:", e)
+
+		const updatedRecipe = recipes.map(recipe => {
+			if(recipe._id === e._id) {
+				return { ...recipe, isEditing: !e.isEditing}
+			}
+			return recipe
+		})
+
+		setRecipes(updatedRecipe)
+
+		await axios.put(`api/recipes/${e._id}`, updatedRecipe[0])
+			.catch(error => console.log('Error', error))
 	}
 
 	const handleChange = (e) => {
@@ -54,7 +72,8 @@ function Recipe() {
 		const recipe = { 
 			name: e.target[0].value,
 			url: e.target[1].value,
-			notes: e.target[2].value
+			notes: e.target[2].value,
+			isEditing: false
 		}
 
 		await axios.post('/api/recipes', recipe)
@@ -81,13 +100,21 @@ function Recipe() {
 					<li className="element-container" key={recipe._id}>
 						<span className="element-line-decoration"><FaSquare /></span>
 
+						{/* hyperlink url if it exists */}
 						{recipe.url ? 
 							<span className="element-item-name"><a href={recipe.url}>{recipe.name}</a></span> : 
 							<span className="element-item-name">{recipe.name}</span>
 						}
 
-						<span className="element-icon-edit"><FaPen /></span>
+						{/* Edit Icon */}
+						<span 
+							className="element-icon-edit"
+							onClick={() => editRecipe(recipe)}
+						>
+							<FaPen />
+						</span>
 						
+						{/* Delete Icon */}
 						<span 
 							className="element-icon-trash"
 							onClick={() => deleteRecipe(recipe._id)}
