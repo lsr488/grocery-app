@@ -2,6 +2,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
 import RecipeForm from './RecipeForm'
+import EditRecipe from './EditRecipe'
 
 function Recipe() {
 	const [recipes, setRecipes] = useState([{
@@ -33,36 +34,19 @@ function Recipe() {
 
 	// changes isEditing status
 	const editRecipe = async (e) => {
-		console.log("e:", e)
+		const updatedRecipe = recipes.filter((recipe) => recipe._id === e._id)
 
-		const updatedRecipe = recipes.map(recipe => {
-			if(recipe._id === e._id) {
-				return { ...recipe, isEditing: !e.isEditing}
-			}
-			return recipe
-		})
-
-		setRecipes(updatedRecipe)
+		updatedRecipe[0].isEditing = !e.isEditing
 
 		await axios.put(`api/recipes/${e._id}`, updatedRecipe[0])
 			.catch(error => console.log('Error', error))
+
+		setRecipes([...recipes])
 	}
 
 	const handleChange = (e) => {
 		e.preventDefault()
-		// console.log("Recipe handleChange:", e.target)
-		// console.log("Recipe handleChange:", e.target.name)
-		// console.log("Recipe handleChange:", e.target.value)
 
-		setRecipes(prevRecipes => (
-			[
-				...prevRecipes,
-				{
-				[e.target.name]: e.target.value
-			}])
-		)
-
-		// console.log("recipes:", recipes)
 	}
 
 	// add new recipe to db
@@ -98,14 +82,26 @@ function Recipe() {
 			<ul>
 				{recipes.map((recipe) => (
 					<li className="element-container" key={recipe._id}>
-						<span className="element-line-decoration"><FaSquare /></span>
 
-						{/* hyperlink url if it exists */}
-						{recipe.url ? 
-							<span className="element-item-name"><a href={recipe.url}>{recipe.name}</a></span> : 
-							<span className="element-item-name">{recipe.name}</span>
-						}
+						
+						{/* display editable form if isEditing is true, else display static element */}
 
+						{/* {recipe.isEditing ? 
+							<EditRecipe recipe={recipe} /> : 
+		
+							//  hyperlink url if it exists  */}
+							{recipe.url ? 
+							<>
+								<span className="element-line-decoration"><FaSquare /></span>
+								<span className="element-item-name"><a href={recipe.url}>{recipe.name}</a></span> 
+							</> : 
+							<>
+								<span className="element-line-decoration"><FaSquare /></span>
+								<span className="element-item-name">{recipe.name}</span>
+							</>
+								
+
+					}
 						{/* Save Icon */}
 						<span
 							className={`element-icon-save ${recipe.isEditing ? '' : 'hidden'}`}
