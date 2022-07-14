@@ -12,6 +12,10 @@ const recipeSchema = mongoose.Schema({
 	url: {
 		type: String,
 		required: false
+	},
+	isEditing: {
+		type: Boolean,
+		required: false
 	}
 });
 
