@@ -20,17 +20,24 @@ function Item() {
 
 	// get items from database and setItems based on response
 	const getItems = async () => {
+		setIsLoading(true)
 		await axios.get('/api/items')
 			.then((response) => {
 				setItems(response.data)
+				setIsLoading(false)
 			})
 			.catch((error) => console.log('Error', error))
 	}
 	
 	// updates single item in database
 	const updateSingleItem = async (item) => {
+		setIsLoading(true)
 		await axios.put(`api/items/${item._id}`, item)
-			.catch((error) => console.log('Error', error))
+			.then(() => setIsLoading(false))
+			.catch((error) => {
+				console.log('Error', error)
+				setIsLoading(false)
+			})
 
 			setItems([...items])
 	}
@@ -92,17 +99,23 @@ function Item() {
 		e.target[0].value = ''
 	}
 
+	// the Save button calls editItem, which handles the PUT request
 	const onChange = async (e) => {
 		const value = e.target.value
 		const id = e.target.id
 	
-		const updatedItem = items.filter((item) => item._id === id)
+		const updatedItems = items.filter((item) => item._id === id)
 
-		updatedItem[0].name = value
+		if(updatedItems) {
+			updatedItems.forEach(item => {
+				item.name = value
+			})
+		} else {
+			console.log('There is no item to change')
+		}
 
-		await axios.put(`api/items/${id}`, updatedItem[0])
-		.catch((error) => console.log('Error', error))
-
+		// automatically stores changes to the name in state, so the PUT request handled
+		// by clicking the Save button knows the new name
 		setItems([...items])
 	}
 	
@@ -167,10 +180,7 @@ function Item() {
 								</li>
 							))}
 						</>
-
 					}
-
-
 				</ul>
 		</>
 	)
