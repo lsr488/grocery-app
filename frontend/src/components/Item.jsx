@@ -25,18 +25,27 @@ function Item() {
 			.catch((error) => console.log('Error', error))
 	}
 	
-	// toggles strikethough on item name when clicked
-	const strikeThrough = async (e) => {
-		const elementId = e.target.parentNode.id
-		const updatedItem = items.filter((item) => item._id === elementId)
-
-		console.log(updatedItem)
-		updatedItem[0].isChecked = !updatedItem[0].isChecked
-
-		await axios.put(`api/items/${elementId}`, updatedItem[0])
+	// updates single item in database
+	const updateSingleItem = async (item) => {
+		await axios.put(`api/items/${item._id}`, item)
 			.catch((error) => console.log('Error', error))
 
 			setItems([...items])
+	}
+
+	// toggles strikethough on item name when clicked
+	const strikeThrough = async (e) => {
+		const elementId = e.target.parentNode.id
+		const updatedItems = items.filter((item) => item._id === elementId)
+
+		if(updatedItems) {
+			updatedItems.forEach(item => {
+				item.isChecked = !item.isChecked
+				updateSingleItem(item)
+			})
+		} else {
+			console.log('There is no item to update')
+		}
 	}
 
 	const deleteItem = async (id) => {
@@ -47,14 +56,16 @@ function Item() {
 
 	// changes isEditing status
 	const editItem = async (e) => {
-		const updatedItem = items.filter((item) => item._id === e._id)
+		const updatedItems = items.filter((item) => item._id === e._id)
 
-		updatedItem[0].isEditing = !e.isEditing
-
-		await axios.put(`api/items/${e._id}`, updatedItem[0])
-			.catch((error) => console.log('Error', error))
-
-			setItems([...items])
+		if(updatedItems) {
+			updatedItems.forEach(item => {
+				item.isEditing = !item.isEditing
+				updateSingleItem(item)
+			})
+		} else {
+			console.log('There is no item to edit')
+		}
 	}
 
 	// add item to db
