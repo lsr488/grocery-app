@@ -12,7 +12,10 @@ function Item() {
 		isEditing: '',
 		_id: ''
 	}])
-	const [isLoading, setIsLoading] = useState(true)
+	const [isLoading, setIsLoading] = useState({
+		status: false,
+		message: 'Loading...'
+	})
 
 	useEffect(() => {
 		getItems()
@@ -20,23 +23,24 @@ function Item() {
 
 	// get items from database and setItems based on response
 	const getItems = async () => {
-		setIsLoading(true)
+		setIsLoading(prevState => prevState, {status: true})
 		await axios.get('/api/items')
 			.then((response) => {
 				setItems(response.data)
-				setIsLoading(false)
+				setIsLoading(prevState => prevState, {status: false})
 			})
 			.catch((error) => console.log('Error', error))
 	}
 	
 	// updates single item in database
 	const updateSingleItem = async (item) => {
-		setIsLoading(true)
+		setIsLoading(prevState => prevState, {status: true})
 		await axios.put(`api/items/${item._id}`, item)
-			.then(() => setIsLoading(false))
+			.then(() => setIsLoading(prevState => prevState, {status: false})
+			)
 			.catch((error) => {
 				console.log('Error', error)
-				setIsLoading(false)
+				setIsLoading(prevState => prevState, {status: false})
 			})
 
 			setItems([...items])
@@ -81,18 +85,18 @@ function Item() {
 	const addItem = async (e) => {
 		e.preventDefault()
 
-		setIsLoading(true)
+		setIsLoading(prevState => prevState, {status: true})
 
 		const item = {name: e.target[0].value}
 
 		await axios.post('/api/items', item)
 			.then((response) => {
 				setItems(prevItems => [...prevItems, response.data])
-				setIsLoading(false)
+				setIsLoading(prevState => prevState, {status: false})
 			})
 			.catch((error) => {
 				console.log('Error', error)
-				setIsLoading(false)
+				setIsLoading(prevState => prevState, {status: false})
 			})
 
 		// sets input field back to empty
@@ -131,7 +135,7 @@ function Item() {
 
 				<h2 className="heading">Items</h2>
 				<ul>
-					{isLoading === true ? <Loading /> : 
+					{isLoading.status === true ? <Loading status={isLoading.status} message={isLoading.message} /> : 
 						<>
 							{items.map((item) => (
 								<li className="element-container" key={item._id} id={item._id}>

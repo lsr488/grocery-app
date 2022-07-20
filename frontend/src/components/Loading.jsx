@@ -1,6 +1,6 @@
-function Loading() {
+function Loading(props) {
   return (
-      <div>Loading...</div>
+      <div>{props.message}</div>
   )
 }
 
