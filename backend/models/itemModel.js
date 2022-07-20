@@ -5,9 +5,9 @@ const itemSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	status: {
-		type: String,
-		default: 'false',
+	isChecked: {
+		type: Boolean,
+		default: false,
 		required: true
 	},
 	isEditing: {

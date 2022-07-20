@@ -7,7 +7,7 @@ import EditItem from './EditItem'
 function Item() {
 	const [items, setItems] = useState([{
 		name: '',
-		status: '',
+		isChecked: null,
 		isEditing: '',
 		_id: ''
 	}])
@@ -30,11 +30,8 @@ function Item() {
 		const elementId = e.target.parentNode.id
 		const updatedItem = items.filter((item) => item._id === elementId)
 
-		if(updatedItem[0].status === 'false') {
-			updatedItem[0].status = 'true'
-		} else {
-			updatedItem[0].status = 'false'
-		}
+		console.log(updatedItem)
+		updatedItem[0].isChecked = !updatedItem[0].isChecked
 
 		await axios.put(`api/items/${elementId}`, updatedItem[0])
 			.catch((error) => console.log('Error', error))
@@ -102,7 +99,7 @@ function Item() {
 						<li className="element-container" key={item._id} id={item._id}>
 							<span className="element-line-decoration">
 								{/* change between square styles based on item status */}
-								{item.status === "true" ? <FaSquare /> : <FaRegSquare />}
+								{item.isChecked === true ? <FaSquare /> : <FaRegSquare />}
 							</span>
 
 							{/* display editable form if isEditing is true, otherwise display static element */}
@@ -110,10 +107,11 @@ function Item() {
 								<EditItem item={item} onChange={onChange} /> : 
 								<span
 									// strikethrough if clicked
-									className={`element-item-name ${item.status === 'true' ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}
+									className={`element-item-name ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}
 									// strikeThrough if clicked and not editing
 									onClick={!item.isEditing ? strikeThrough : null}							
-									status={item.status}
+									// why do we need to pass in item.isChecked here...?
+									// isChecked={item.isChecked}
 									value={item.name}
 								>{item.name}</span>
 							}
