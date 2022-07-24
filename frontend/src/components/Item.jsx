@@ -123,9 +123,9 @@ function Item() {
 
 	return (
 			<>
-				<ItemForm onSubmit={addItem} />
-
 				<h2 className="heading">Items</h2>
+				<ItemForm onSubmit={addItem} />
+				
 				<ul>
 					{isLoading.status === true ? <Loading status={isLoading.status} message={isLoading.message} /> : 
 						<>
