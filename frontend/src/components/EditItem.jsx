@@ -15,7 +15,7 @@ function EditItem(props) {
 
         <input
           className="element-input"
-          type="text" 
+          type="number" 
           id={props.item._id}
           name="cost"
           placeholder="Enter item cost"
