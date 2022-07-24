@@ -8,7 +8,7 @@ import Loading from './Loading'
 function Item() {
 	const [items, setItems] = useState([{
 		name: '',
-		isChecked: null,
+		isChecked: false,
 		isEditing: '',
 		_id: ''
 	}])
@@ -29,7 +29,10 @@ function Item() {
 				setItems(response.data)
 				setIsLoading(prevState => prevState, {status: false})
 			})
-			.catch((error) => console.log('Error', error))
+			.catch((error) => {
+				console.log('Error', error)
+				setIsLoading(prevState => prevState, {status: false})
+			})
 	}
 	
 	// updates single item in database
@@ -47,18 +50,14 @@ function Item() {
 	}
 
 	// toggles strikethough on item name when clicked
-	const strikeThrough = async (e) => {
+	const strikeThrough = (e) => {
 		const elementId = e.target.parentNode.id
 		const updatedItems = items.filter((item) => item._id === elementId)
 
-		if(updatedItems) {
-			updatedItems.forEach(item => {
-				item.isChecked = !item.isChecked
-				updateSingleItem(item)
-			})
-		} else {
-			console.log('There is no item to update')
-		}
+		updatedItems.map(item => {
+			item.isChecked = !item.isChecked
+			updateSingleItem(item)
+		})
 	}
 
 	const deleteItem = async (id) => {
@@ -68,17 +67,13 @@ function Item() {
 	}
 
 	// changes isEditing status
-	const editItem = async (e) => {
+	const editItem = (e) => {
 		const updatedItems = items.filter((item) => item._id === e._id)
 
-		if(updatedItems) {
-			updatedItems.forEach(item => {
-				item.isEditing = !item.isEditing
-				updateSingleItem(item)
-			})
-		} else {
-			console.log('There is no item to edit')
-		}
+		updatedItems.map(item => {
+			item.isEditing = !item.isEditing
+			updateSingleItem(item)
+		})
 	}
 
 	// add item to db
@@ -104,22 +99,25 @@ function Item() {
 	}
 
 	// the Save button calls editItem, which handles the PUT request
-	const onChange = async (e) => {
+	const onChange = (e) => {
 		const value = e.target.value
 		const id = e.target.id
+		const name = e.target.name
 	
 		const updatedItems = items.filter((item) => item._id === id)
-
+		console.log(updatedItems)
 		if(updatedItems) {
 			updatedItems.forEach(item => {
-				item.name = value
+				if(item._id === id) {
+					item[name] = value
+				}
 			})
 		} else {
 			console.log('There is no item to change')
 		}
 
 		// automatically stores changes to the name in state, so the PUT request handled
-		// by clicking the Save button knows the new name
+		// by clicking the Save button already knows the new name
 		setItems([...items])
 	}
 	
@@ -129,8 +127,6 @@ function Item() {
 
 	return (
 			<>
-				
-
 				<ItemForm onSubmit={addItem} />
 
 				<h2 className="heading">Items</h2>
