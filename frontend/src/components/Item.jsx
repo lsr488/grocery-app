@@ -152,14 +152,11 @@ function Item() {
 											>{item.name}</span>
 
 											{/* display item cost if it exists */}
-
 											{item.cost > 0 ? 
 												<span className={`element-item-cost ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}>{item.cost > 0 ? `$${item.cost}` : null}</span>
 												:
 												null
 											}
-
-											{/* < */}
 										</>
 									}
 									
