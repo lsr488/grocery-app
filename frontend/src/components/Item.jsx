@@ -57,6 +57,7 @@ function Item() {
 		updatedItems.map(item => {
 			item.isChecked = !item.isChecked
 			updateSingleItem(item)
+			return item
 		})
 	}
 
@@ -73,6 +74,7 @@ function Item() {
 		updatedItems.map(item => {
 			item.isEditing = !item.isEditing
 			updateSingleItem(item)
+			return item
 		})
 	}
 
@@ -109,6 +111,7 @@ function Item() {
 		updatedItems.map(item => {
 			item[elementName] = elementValue
 			updateSingleItem(item)
+			return item
 		})
 		
 		setItems([...items])
