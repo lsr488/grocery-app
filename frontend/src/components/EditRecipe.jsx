@@ -1,47 +1,37 @@
-function RecipeForm(props) {
+function EditRecipe(props) {
+
   return (
     <>
       <form>
-        <div>
           <input 
             type="text"
-            id="recipe-name"
+            id={props.recipe._id}
             name="name"
             placeholder="Enter a recipe name"
             value={props.recipe.name}
+            onChange={props.onChange}
           />
           
-          <details>
-            <summary className="more-text">More</summary>
-            <div>
-              <input 
-                type="text"
-                id="recipe=url"
-                name="url"
-                placeholder="Enter a URL"
-                value={props.recipe.url}
-                />
-            </div>
+          <input 
+            type="text"
+            id={props.recipe._id}
+            name="url"
+            placeholder="Enter a URL"
+            value={props.recipe.url}
+            onChange={props.onChange}
+            />
 
-            <div>  
-              <input 
-                type="text"
-                id="recipe-notes"
-                name="notes"
-                placeholder="Enter notes. Separate with semicolon"
-                value={props.recipe.notes}
-                />          
-            </div>
-          </details>
-        </div>
-
-        <div>
-          <button type="submit">Submit</button>
-        </div>        
+          <input 
+            type="text"
+            id={props.recipe._id}
+            name="notes"
+            placeholder="Enter notes. Separate with semicolon"
+            value={props.recipe.notes}
+            onChange={props.onChange}
+            />
       </form>
     </>
   )
-
 }
 
-export default RecipeForm
+export default EditRecipe
