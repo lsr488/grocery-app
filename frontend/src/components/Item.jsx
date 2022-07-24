@@ -84,7 +84,9 @@ function Item() {
 
 		setIsLoading(prevState => prevState, {status: true})
 
-		const item = {name: e.target[0].value}
+		// get value of item name from form
+		const formName = e.target.name.value
+		const item = {name: formName}
 
 		await axios.post('/api/items', item)
 			.then((response) => {
@@ -97,7 +99,7 @@ function Item() {
 			})
 
 		// sets input field back to empty
-		e.target[0].value = ''
+		e.target.name.value = ''
 	}
 
 	// the Save button calls editItem, which handles the PUT request
@@ -113,7 +115,7 @@ function Item() {
 			updateSingleItem(item)
 			return item
 		})
-		
+
 		setItems([...items])
 	}
 	
