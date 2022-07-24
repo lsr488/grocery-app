@@ -105,14 +105,18 @@ function Item() {
 
 	// the Save button calls editItem, which handles the PUT request
 	const onChange = (e) => {
-		const elementValue = e.target.value
+		let elementValue = e.target.value
 		const elementId = e.target.id
 		const elementName = e.target.name
 	
 		const updatedItems = items.filter((item) => item._id === elementId)
 		
 		updatedItems.map(item => {
-			item[elementName] = elementValue
+			if(elementName === "cost") {
+				item[elementName] = parseFloat(elementValue)
+			} else {
+				item[elementName] = elementValue
+			}
 			return updateSingleItem(item)
 		})
 
@@ -186,12 +190,11 @@ function Item() {
 										<FaTrash />
 									</span>
 								</li>
-							
 							))}
-							<RunningTotal items={items}/>
 						</>
 					}
 				</ul>
+			<RunningTotal items={items} />
 		</>
 	)
 }
