@@ -1,17 +1,17 @@
 function RunningTotal(props) {
 
-  const itemCosts = []
+    const itemCosts = []
 
-  // get item costs into an array
-  props.items.map(item => {
-    return itemCosts.push(item.cost)
-  })
-
-  // sum values in array
-  const itemCostsSum = itemCosts.reduce((acc, value) => value + acc, 0)
+    // get item costs into an array
+    props.items.map(item => {
+      return itemCosts.push(item.cost)
+    })
+  
+    // sum values in array
+    const itemCostSum = itemCosts.reduce((acc, value) => acc + value, 0).toFixed(2)
 
   return (
-    <h3>Total: ${itemCostsSum.toFixed(2)}</h3>
+    <h4 className="heading">Total: ${itemCostSum}</h4>
   )
 }
 
