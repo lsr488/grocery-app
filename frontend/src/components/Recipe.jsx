@@ -139,13 +139,13 @@ function Recipe() {
 									<EditRecipe recipe={recipe} onChange={onChange} /> : 
 									<>
 										{/* hyperlink recipe name if URL exists */}
-										<span className="element-item-name">
+										<span className="element-recipe-name">
 											{recipe.url ? <a href={recipe.url}>{recipe.name}</a> : recipe.name}
 										</span>
 
 										{/* display notes if they exist */}
 										{recipe.notes ? 
-											<span className="element-item-notes">
+											<span className="element-recipe-notes">
 												{splitNotes(recipe.notes).map((note, index) => <div key={index}>{note}</div>)}
 											</span> :
 											null
