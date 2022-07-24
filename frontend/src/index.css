@@ -83,7 +83,7 @@ button {
   display: grid;
   align-items: center;
   max-width: 500px;
-  grid-template-columns: 25px auto 25px 25px;
+  grid-template-columns: 25px 3fr 1fr 25px 25px;
 }
 
 .element-line-decoration {
@@ -96,20 +96,36 @@ button {
   margin-left: 6px;
 }
 
+.element-item-cost {
+  grid-column: 3 / 4;
+}
+
 .element-icon-edit {
-  grid-column: 3 / 4;
-}
-
-.element-icon-save {
-  grid-column: 3 / 4;
-}
-
-.element-icon-trash {
   grid-column: 4 / 5;
 }
 
-.element-item-notes {
-  grid-column: 2 /3;
+.element-icon-save {
+  grid-column: 4 / 5;
+}
+
+.element-icon-trash {
+  grid-column: 5 / 6;
+}
+
+.element-recipe-name {
+  grid-column: 2 / 4;
+  text-align: left;
+  margin-left: 6px;
+}
+
+.element-recipe-notes {
+  grid-column: 2 / 4;
   text-align: left;
   margin-left: 31px;
+}
+
+.element-input {
+  text-indent: 6px;
+  /* width: 200px; */
+  width: 100%;
 }

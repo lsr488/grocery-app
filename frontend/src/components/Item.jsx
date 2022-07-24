@@ -140,15 +140,20 @@ function Item() {
 									{/* display editable form if isEditing is true, otherwise display static element */}
 									{item.isEditing ? 
 										<EditItem item={item} onChange={onChange} /> : 
-										<span
-											// strikethrough if clicked
-											className={`element-item-name ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}
-											// strikeThrough if clicked and not editing
-											onClick={!item.isEditing ? strikeThrough : null}							
-											// why do we need to pass in item.isChecked here...?
-											// isChecked={item.isChecked}
-											value={item.name}
-										>{item.name}</span>
+										<>
+											<span
+												// strikethrough if clicked
+												className={`element-item-name ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}
+
+												// strikeThrough if clicked and not editing
+												onClick={!item.isEditing ? strikeThrough : null}							
+												
+												value={item.name}
+											>{item.name}</span>
+
+											{/* display item cost if it exists */}
+											<span className={`element-item-cost ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}>{item.cost > 0 ? `$${item.cost}` : null}</span>
+										</>
 									}
 									
 									{/* Save Icon: set isEditing to false; save icon displays if item is being edited */}

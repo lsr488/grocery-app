@@ -3,6 +3,7 @@ function EditItem(props) {
     <>
       <form>
         <input 
+          className="element-input"
           type="text" 
           id={props.item._id}
           name="name"
@@ -12,7 +13,8 @@ function EditItem(props) {
           required 
         />
 
-        <input 
+        <input
+          className="element-input"
           type="text" 
           id={props.item._id}
           name="cost"

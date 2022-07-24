@@ -4,6 +4,7 @@ function EditRecipe(props) {
     <>
       <form>
           <input 
+            className="element-input"
             type="text"
             id={props.recipe._id}
             name="name"
@@ -13,6 +14,7 @@ function EditRecipe(props) {
           />
           
           <input 
+            className="element-input"
             type="text"
             id={props.recipe._id}
             name="url"
@@ -22,6 +24,7 @@ function EditRecipe(props) {
             />
 
           <input 
+            className="element-input"
             type="text"
             id={props.recipe._id}
             name="notes"
