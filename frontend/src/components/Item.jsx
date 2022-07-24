@@ -73,8 +73,7 @@ function Item() {
 
 		updatedItems.map(item => {
 			item.isEditing = !item.isEditing
-			updateSingleItem(item)
-			return item
+			return updateSingleItem(item)
 		})
 	}
 
@@ -112,8 +111,7 @@ function Item() {
 		
 		updatedItems.map(item => {
 			item[elementName] = elementValue
-			updateSingleItem(item)
-			return item
+			return updateSingleItem(item)
 		})
 
 		setItems([...items])
