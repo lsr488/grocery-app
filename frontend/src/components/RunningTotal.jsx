@@ -11,7 +11,9 @@ function RunningTotal(props) {
     const itemCostSum = itemCosts.reduce((acc, value) => acc + value, 0).toFixed(2)
 
   return (
-    <h4 className="heading">Total: ${itemCostSum}</h4>
+    <>
+      {itemCostSum > 0 ? <h4 className="heading">Total: ${itemCostSum}</h4> : null}
+    </>    
   )
 }
 
