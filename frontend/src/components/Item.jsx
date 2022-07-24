@@ -100,24 +100,17 @@ function Item() {
 
 	// the Save button calls editItem, which handles the PUT request
 	const onChange = (e) => {
-		const value = e.target.value
-		const id = e.target.id
-		const name = e.target.name
+		const elementValue = e.target.value
+		const elementId = e.target.id
+		const elementName = e.target.name
 	
-		const updatedItems = items.filter((item) => item._id === id)
-		console.log(updatedItems)
-		if(updatedItems) {
-			updatedItems.forEach(item => {
-				if(item._id === id) {
-					item[name] = value
-				}
-			})
-		} else {
-			console.log('There is no item to change')
-		}
-
-		// automatically stores changes to the name in state, so the PUT request handled
-		// by clicking the Save button already knows the new name
+		const updatedItems = items.filter((item) => item._id === elementId)
+		
+		updatedItems.map(item => {
+			item[elementName] = elementValue
+			updateSingleItem(item)
+		})
+		
 		setItems([...items])
 	}
 	
