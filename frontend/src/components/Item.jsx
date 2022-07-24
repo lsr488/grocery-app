@@ -4,6 +4,7 @@ import {FaRegSquare, FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
 import ItemForm from './ItemForm'
 import EditItem from './EditItem'
 import Loading from './Loading'
+import RunningTotal from './RunningTotal'
 
 function Item() {
 	const [items, setItems] = useState([{
@@ -122,6 +123,7 @@ function Item() {
 		console.log("no items")
 	}
 
+
 	return (
 			<>
 				<h2 className="heading">Items</h2>
@@ -184,7 +186,9 @@ function Item() {
 										<FaTrash />
 									</span>
 								</li>
+							
 							))}
+							<RunningTotal items={items}/>
 						</>
 					}
 				</ul>
