@@ -5,6 +5,10 @@ const itemSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	cost: {
+		type: Number,
+		default: 0
+	},
 	isChecked: {
 		type: Boolean,
 		default: false,
