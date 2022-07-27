@@ -45,7 +45,7 @@ function Item() {
 			.then(() => setIsLoading(prevState => prevState, {status: false})
 			)
 			.catch((error) => {
-				console.log('Error', error)
+				console.log('Error', error.response.data)
 				setIsLoading(prevState => prevState, {status: false})
 			})
 
@@ -96,7 +96,7 @@ function Item() {
 				setIsLoading(prevState => prevState, {status: false})
 			})
 			.catch((error) => {
-				console.log('Error', error)
+				console.log('Error', error.response.data)
 				setIsLoading(prevState => prevState, {status: false})
 			})
 
