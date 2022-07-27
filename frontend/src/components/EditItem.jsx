@@ -1,11 +1,12 @@
 function EditItem(props) {
+  console.log(props)
 	return (
     <>
       <form>
         <input 
           className="element-input"
           type="text" 
-          id={props.item._id}
+          id={props.item.id}
           name="name"
           placeholder="Enter item name"
           onChange={props.onChange}
@@ -16,7 +17,7 @@ function EditItem(props) {
         <input
           className="element-input"
           type="number" 
-          id={props.item._id}
+          id={props.item.id}
           name="cost"
           placeholder="Enter item cost"
           onChange={props.onChange}
@@ -29,5 +30,3 @@ function EditItem(props) {
 }
 
 export default EditItem
-
-
