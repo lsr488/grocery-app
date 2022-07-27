@@ -134,7 +134,6 @@ function Item() {
 		}
 		
 		if(e.currentTarget.id === 'delete-btn') {
-			console.log("the delete button")
 			deleteItem(elementId)
 		}
 				
@@ -149,7 +148,9 @@ function Item() {
 				<ItemForm onSubmit={addItem} />
 
 				<ul>
-					{isLoading.status === true ? <Loading status={isLoading.status} message={isLoading.message} /> : 
+					{isLoading.status === true 
+					? <Loading status={isLoading.status} message={isLoading.message} /> 
+					: 
 						<>
 							{items.map((item) => (
 								<ListItem 
