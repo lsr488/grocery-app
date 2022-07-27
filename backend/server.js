@@ -20,7 +20,7 @@ app.use('/api/items', require('./routes/itemRoutes'));
 app.use('/api/recipes', require('./routes/recipeRoutes'));
 
 // STATIC FILES
-if(process.env.NODE_ENV ===) {
+if(process.env.NODE_ENV === 'production') {
 	// set build folder as static
 	app.use(express.static(path.join(__dirname, '../frontend/build')));
 	app.get('*', (req, res) => {
