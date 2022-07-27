@@ -1,5 +1,4 @@
 function EditItem(props) {
-  console.log(props)
 	return (
     <>
       <form>
