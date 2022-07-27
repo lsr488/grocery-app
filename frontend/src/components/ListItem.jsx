@@ -21,6 +21,13 @@ function ListItem(props) {
           onClick={props.handleClick}
         >{props.name}</span>        
       }
+
+      {/* conditionally display cost if greater than 0 */}
+      {props.cost > 0 ? 
+        <span className={`element-item-cost ${props.isChecked === true ? 'checked' : ''} ${props.isEditing ? 'hidden' : ''}`}>{props.cost > 0 ? `$${props.cost}` : null}</span>
+      : 
+        null
+      }
       
       {/* edit button, conditional className */}
       <span
