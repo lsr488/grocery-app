@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import {FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
 import RecipeForm from './RecipeForm'
-import EditRecipe from './EditRecipe'
+import ListRecipe from './ListRecipe'
+// import EditRecipe from './EditRecipe'
 import Loading from './Loading'
 
 function Recipe() {
@@ -58,8 +58,9 @@ function Recipe() {
 	}
 
 	// changes isEditing status
-	const editRecipe = async (e) => {
-		const updatedRecipes = recipes.filter((recipe) => recipe._id === e._id)
+	const editRecipe = async (id) => {
+		console.log(id)
+		const updatedRecipes = recipes.filter((recipe) => recipe._id === id)
 
 		updatedRecipes.map(recipe => {
 			recipe.isEditing = !recipe.isEditing
@@ -71,9 +72,9 @@ function Recipe() {
 
 	// change recipe values
 	const onChange = (e) => {
-		const elementValue = e.target.value
-		const elementId = e.target.id
-		const elementName = e.target.name
+		const elementValue = e.currentTarget.value
+		const elementId = e.currentTarget.id
+		const elementName = e.currentTarget.name
 		
 		const updatedRecipes = recipes.filter(recipe => recipe._id === elementId)
 		
@@ -115,8 +116,17 @@ function Recipe() {
 		e.target.notes.value = ''
 	}
 
-	// splits recipe notes into an array so they can be broken onto own lines
-	const splitNotes = (notes => notes.split(';'))
+	const handleClick = (e) => {
+		const elementId = e.currentTarget.parentNode.id
+		
+		if(e.currentTarget.id === 'edit-btn' || e.currentTarget.id === 'save-btn') {
+			editRecipe(elementId)
+		}
+		
+		if(e.currentTarget.id === 'delete-btn') {
+			deleteRecipe(elementId)
+		}
+	}
 
 	return (
 		<>
@@ -127,57 +137,22 @@ function Recipe() {
 			/>
 			<ul>
 
-				{isLoading.status === true ? <Loading status={isLoading.status} message={isLoading.message} /> :
+				{isLoading.status === true 
+				? <Loading status={isLoading.status} message={isLoading.message} /> 
+				:
 					<>
 						{/* Q: why does Recipes need the index to act as the key, but Items is OK with _id? */}
 						{recipes.map((recipe, index) => (
-							<li className="element-container" key={index}>
-								<span className="element-line-decoration"><FaSquare /></span>
-
-								{/* display editable form if isEditing is true, else display static element */}
-								{recipe.isEditing ? 
-									<EditRecipe recipe={recipe} onChange={onChange} /> : 
-									<>
-										{/* hyperlink recipe name if URL exists */}
-										<span className="element-recipe-name">
-											{recipe.url ? <a href={recipe.url}>{recipe.name}</a> : recipe.name}
-										</span>
-
-										{/* display notes if they exist */}
-										{recipe.notes ? 
-											<span className="element-recipe-notes">
-												{splitNotes(recipe.notes).map((note, index) => <div key={index}>{note}</div>)}
-											</span> :
-											null
-										}
-									</>
-								}	
-
-								{/* Save Icon */}
-								<span
-									className={`element-icon-save ${recipe.isEditing ? '' : 'hidden'}`}
-									onClick={() => editRecipe(recipe)}
-								>
-									<FaCheck />
-								</span>
-
-								{/* Edit Icon */}
-								<span 
-									className={`element-icon-edit ${recipe.isEditing ? 'hidden' : ''}`}
-									onClick={() => editRecipe(recipe)}
-								>
-									<FaPen />
-								</span>
-								
-								{/* Delete Icon */}
-								<span 
-									className={`element-icon-trash ${recipe.isEditing ? 'hidden' : ''}`}
-									onClick={() => deleteRecipe(recipe._id)}
-								>
-									<FaTrash />
-								</span>
-
-							</li>
+							<ListRecipe  
+								key={index}
+								id={recipe._id}
+								name={recipe.name}
+								url={recipe.url}
+								notes={recipe.notes}
+								isEditing={recipe.isEditing}
+								handleClick={handleClick}
+								onChange={onChange}
+							/>
 						))}
 					</>
 				}
