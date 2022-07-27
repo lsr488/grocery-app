@@ -26,13 +26,14 @@ function Item() {
 	// get items from database and setItems based on response
 	const getItems = async () => {
 		setIsLoading(prevState => prevState, {status: true})
+		debugger
 		await axios.get('/api/items')
 			.then((response) => {
 				setItems(response.data)
 				setIsLoading(prevState => prevState, {status: false})
 			})
 			.catch((error) => {
-				console.log('Error', error)
+				console.log('Error', error.response.data)
 				setIsLoading(prevState => prevState, {status: false})
 			})
 	}

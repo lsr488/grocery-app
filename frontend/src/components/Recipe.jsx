@@ -30,7 +30,7 @@ function Recipe() {
 				setIsLoading(prevState => prevState, {status: false})
 			})
 			.catch((error) => {
-				console.log('Error', error)
+				console.log('Error', error.response.data)
 				setIsLoading(prevState => prevState, {status: false})
 			})
 	}
