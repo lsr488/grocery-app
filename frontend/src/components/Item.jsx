@@ -1,8 +1,7 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import {FaRegSquare, FaSquare, FaPen, FaCheck, FaTrash} from 'react-icons/fa'
 import ItemForm from './ItemForm'
-import EditItem from './EditItem'
+import ListItem from './ListItem'
 import Loading from './Loading'
 import RunningTotal from './RunningTotal'
 
@@ -26,7 +25,6 @@ function Item() {
 	// get items from database and setItems based on response
 	const getItems = async () => {
 		setIsLoading(prevState => prevState, {status: true})
-		debugger
 		await axios.get('/api/items')
 			.then((response) => {
 				setItems(response.data)
@@ -53,9 +51,9 @@ function Item() {
 	}
 
 	// toggles strikethough on item name when clicked
-	const strikeThrough = (e) => {
-		const elementId = e.target.parentNode.id
-		const updatedItems = items.filter((item) => item._id === elementId)
+	const strikeThrough = (id) => {
+		// e is already the element's ID
+		const updatedItems = items.filter((item) => item._id === id)
 
 		updatedItems.map(item => {
 			item.isChecked = !item.isChecked
@@ -71,8 +69,8 @@ function Item() {
 	}
 
 	// changes isEditing status
-	const editItem = (e) => {
-		const updatedItems = items.filter((item) => item._id === e._id)
+	const editItem = (id) => {
+		const updatedItems = items.filter((item) => item._id === id)
 
 		updatedItems.map(item => {
 			item.isEditing = !item.isEditing
@@ -128,6 +126,22 @@ function Item() {
 		console.log("no items")
 	}
 
+	const handleClick = (e) => {
+		const elementId = e.currentTarget.parentNode.id
+		
+		if(e.currentTarget.id === 'edit-btn' || e.currentTarget.id === 'save-btn') {
+			editItem(elementId)
+		}
+		
+		if(e.currentTarget.id === 'delete-btn') {
+			console.log("the delete button")
+			deleteItem(elementId)
+		}
+				
+		if(e.currentTarget.id === 'strike') {
+			strikeThrough(elementId)
+		}
+	}
 
 	return (
 			<>
@@ -138,59 +152,16 @@ function Item() {
 					{isLoading.status === true ? <Loading status={isLoading.status} message={isLoading.message} /> : 
 						<>
 							{items.map((item) => (
-								<li className="element-container" key={item._id} id={item._id}>
-									{/* change between square styles based on item status */}
-									<span className="element-line-decoration">
-										{item.isChecked === true ? <FaSquare /> : <FaRegSquare />}
-									</span>
-		
-									{/* display editable form if isEditing is true, otherwise display static element */}
-									{item.isEditing ? 
-										<EditItem item={item} onChange={onChange} /> : 
-										<>
-											<span
-												// strikethrough if clicked
-												className={`element-item-name ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}
-
-												// strikeThrough if clicked and not editing
-												onClick={!item.isEditing ? strikeThrough : null}							
-												
-												value={item.name}
-											>{item.name}</span>
-
-											{/* display item cost if it exists */}
-											{item.cost > 0 ? 
-												<span className={`element-item-cost ${item.isChecked === true ? 'checked' : ''} ${item.isEditing ? 'hidden' : ''}`}>{item.cost > 0 ? `$${item.cost}` : null}</span>
-												:
-												null
-											}
-										</>
-									}
-									
-									{/* Save Icon: set isEditing to false; save icon displays if item is being edited */}
-									<span 
-										onClick={() => editItem(item)} 
-										className={`element-icon-save ${item.isEditing ? '' : 'hidden'}`}
-									>
-										<FaCheck />
-									</span>
-		
-									{/* Edit Icon: set isEditing to true; edit icon is displayed if item is not being edited */}
-									<span 
-										onClick={() => editItem(item)} 
-										className={`element-icon-edit ${item.isEditing ? 'hidden' : ''}`}
-									>
-										<FaPen />
-									</span>
-		
-									{/* Delete Icon: delete icon is displayed if item is not being edited */}
-									<span 
-										onClick={() => deleteItem(item._id)} 
-										className={`element-icon-trash ${item.isEditing ? 'hidden' : null}`}
-									>
-										<FaTrash />
-									</span>
-								</li>
+								<ListItem 
+									key={item._id}
+									id={item._id}
+									name={item.name}
+									cost={item.cost}
+									isChecked={item.isChecked}
+									isEditing={item.isEditing}
+									handleClick={handleClick}
+									onChange={onChange}
+								/>
 							))}
 						</>
 					}
