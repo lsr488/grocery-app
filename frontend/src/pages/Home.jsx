@@ -1,6 +1,6 @@
 // import ItemForm from '../components/ItemForm'
-import Item from '../components/Item'
-import Recipe from '../components/Recipe'
+import Item from '../components/items/Item'
+import Recipe from '../components/recipes/Recipe'
 
 function Home() {
 	return (
