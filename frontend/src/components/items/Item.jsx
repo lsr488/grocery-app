@@ -2,7 +2,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import ItemForm from './ItemForm'
 import ListItem from './ListItem'
-import Loading from './Loading'
+import Loading from '../Loading'
 import RunningTotal from './RunningTotal'
 
 function Item() {
@@ -137,7 +137,7 @@ function Item() {
 			deleteItem(elementId)
 		}
 				
-		if(e.currentTarget.id === 'strike') {
+		if(e.currentTarget.id === 'name') {
 			strikeThrough(elementId)
 		}
 	}

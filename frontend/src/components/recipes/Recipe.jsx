@@ -2,8 +2,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import RecipeForm from './RecipeForm'
 import ListRecipe from './ListRecipe'
-// import EditRecipe from './EditRecipe'
-import Loading from './Loading'
+import Loading from '../Loading'
 
 function Recipe() {
 	const [recipes, setRecipes] = useState([{
@@ -59,7 +58,6 @@ function Recipe() {
 
 	// changes isEditing status
 	const editRecipe = async (id) => {
-		console.log(id)
 		const updatedRecipes = recipes.filter((recipe) => recipe._id === id)
 
 		updatedRecipes.map(recipe => {
